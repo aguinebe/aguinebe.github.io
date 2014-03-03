@@ -37,7 +37,7 @@ To close this gap and turn Tableau Server into an alerting server, here are the 
 
 1. **Install the ruby development environment**. Luckily there are one-click install packages out there.
 
-1. **Configure Tableau Server to accept requests for trusted tickets**. This enables the emailing script to impersonate the recipient of each email instead of using filters to filter the relevant information. This step is necessary if you have row-level security implemented in published datasources.
+1. **Configure Tableau Server to accept requests for trusted tickets**. This does two things for you. First, the script will not need to know any password, it will simply request trusted tickets to perform its work. Second, ans this optional, it enables the emailing script to impersonate the recipient of each email instead of using filters to filter the relevant information. This impersonation is necessary if you have row-level security implemented in published datasources.
 
 1. **Install an SMTP mail server** if you don't already have one 
 
@@ -95,7 +95,72 @@ The workbook should have at least two sheets:
 | `content`      | The content sheet has the content that will be emailed. It should optionnaly have a field that we can use to filter, e.g. in our example workbook the `manager` field can be used to filter and customize this sheet for a particular recipient. As an alternative to the filter field, the ruby script can use trusted ticket to sign into Tableau Server and impersonate the recipients.  |
 
 
+## Setting up ruby ##
+
+<div markdown="1" class="todo">
+
+<p class="todotitle">TODO</p>
+1. Head over to [Ruby Installer] and download the ruby installer. As I am writing this the latest version is ruby 1.9.3.
+1. As the name indicates, this is an installer, specially for Windows. Simply run the .exe, click through the setup wizard.
+1. Open a command prompt, type `irb`, which is the interactive ruby shell
+1. Type `print 'Hello, world'`
+1. You have written your first line of ruby! Close this command prompt.
+
+</div>
+
+![Testing ruby]({{ site.url }}/assets/testing_ruby.png)
+
+## Setting up an email server ##
+
+If you already have an SMTP server that you can use, skip this test. Otherwise:
+
+<div markdown="1" class="todo">
+
+<p class="todotitle">TODO</p>
+1. Install an SMTP server. I like [hMailServer] but any mail server will work.
+
+</div>
+
+## Enable trusted tickets ##
+
+This step enables the script to run reports on behalf of the administrator, and if needed, on behalf of recipients too.
+
+To enable trusted tickets,
+
+<div markdown="1" class="todo">
+
+<p class="todotitle">TODO</p>
+1. Figure out the IP address of the machine that is going to run the alerting script. You can do this with a command prompt and the `ipconfig` command.
+1. Follow the instructions on how to [setup trusted tickets] on the Tableau online documentation.
+
+</div>
+
+## Download the script and test it! ##
+
+We're ready to test this!
+
+<div markdown="1" class="todo">
+
+<p class="todotitle">TODO</p>
+1. Download the [tabalert.rb]({{ site.url }}/assets/tabalert.rb) script.
+1. To test it out, open a command prompt, and type:
+</div>
+
+    ruby tabalert.rb inventory_alerts Default 1=1 manager
+
+Let's review the parameters:
+
+| Parameter    | Value in our Example | Purpose |
+|--------------|----------------------|---------|
+| `workbookname` | inventory_alerts     | The name of the workbook as published on Tableau Server |
+| `sitename`     | Default              | The site you published your workbook to                 |
+| `additional url string` | 1=1         | This will be added to the URL when requesting both the list of recipients, and the content to be sent out. Use this to pass, for example, a parameter value. Or leave it at 1=1 which does nothing. |
+| `trusted or field to filter` | manager | Indicate here `trusted` if you want to customize the content sheet by impersonating the recipient, or a field name to place a filter on this field and pass the name of the recipient. In our example, the `manager` field will be filtered using values found in the first column of the `recipients` sheet. |
+
 [Tableau Software]: http://www.tableausoftware.com
 [Business Intelligence]: http://en.wikipedia.org/wiki/Business_intelligence
 [alerting capabilities for system health issues]: http://onlinehelp.tableausoftware.com/current/server/en-us/help.htm#email.htm
 [Subscriptions]: http://www.tableausoftware.com/about/blog/2013/3/subscriptions-reports-or-worksheets-21635
+[Ruby Installer]: http://rubyinstaller.org/
+[hMailServer]: http://www.hmailserver.com/
+[setup trusted tickets]: http://onlinehelp.tableausoftware.com/current/server/en-us/trusted_auth_trustIP.htm

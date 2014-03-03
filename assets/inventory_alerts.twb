@@ -1,0 +1,422 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<workbook version='8.2' xml:base='http://localhost' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <!-- build 8100.14.0213.2024                -->
+  <repository-location id='inventoryalerts' path='/t/test/workbooks' revision='1.6' site='test' />
+  <preferences>
+  </preferences>
+  <datasources>
+    <datasource caption='reorder level+ (inventory.xlsx)' inline='true' name='excel.41698.729093877315' version='8.2'>
+      <connection auto-extract='yes' class='excel' driver='Ace12' filename='C:\Users\aguinebertiere\Documents\Topics\Alerting\inventory.xlsx' header='yes' imex='1' server-oauth='' workgroup-auth-mode='as-is'>
+        <relation join='inner' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[inventory$].[product]'>
+              </expression>
+              <expression op='[managers$].[product]'>
+              </expression>
+            </expression>
+          </clause>
+          <relation join='inner' type='join'>
+            <clause type='join'>
+              <expression op='='>
+                <expression op='[inventory$].[product]'>
+                </expression>
+                <expression op='[&apos;reorder level$&apos;].[product]'>
+                </expression>
+              </expression>
+            </clause>
+            <relation name='inventory$' table='[inventory$]' type='table' />
+            <relation name='&apos;reorder level$&apos;' table='[&apos;reorder level$&apos;]' type='table' />
+          </relation>
+          <relation name='managers$' table='[managers$]' type='table' />
+        </relation>
+        <cols>
+          <map key='[&apos;reorder level$&apos;_product]' value='[&apos;reorder level$&apos;].[product]' />
+          <map key='[email address]' value='[managers$].[email address]' />
+          <map key='[inventory]' value='[inventory$].[inventory]' />
+          <map key='[manager]' value='[managers$].[manager]' />
+          <map key='[managers$_product]' value='[managers$].[product]' />
+          <map key='[product]' value='[inventory$].[product]' />
+          <map key='[reorder level]' value='[&apos;reorder level$&apos;].[reorder level]' />
+        </cols>
+        <refresh increment-key='' incremental-updates='false'>
+        </refresh>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' hidden='true' name='[&apos;reorder level$&apos;_product]' role='dimension' type='nominal'>
+      </column>
+      <column caption='on alert' datatype='boolean' name='[Calculation_6270228173321084]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='[inventory]&lt;=[reorder level]' scope-isolation='false' />
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column datatype='string' hidden='true' name='[managers$_product]' role='dimension' type='nominal'>
+      </column>
+      <column-instance column='[Calculation_6270228173321084]' derivation='None' name='[none:Calculation_6270228173321084:nk]' pivot='key' type='nominal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.40126' group-percentage='0.1' measure-ordering='alphabetic' measure-percentage='0.59874' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Calculation_6270228173321084:nk]' type='palette'>
+            <map to='#1f77b4'>
+              <bucket>false</bucket>
+            </map>
+            <map to='#ff7f0e'>
+              <bucket>true</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='content'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='reorder level+ (inventory.xlsx)' name='excel.41698.729093877315' />
+          </datasources>
+          <datasource-dependencies datasource='excel.41698.729093877315'>
+            <column caption='on alert' datatype='boolean' name='[Calculation_6270228173321084]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='[inventory]&lt;=[reorder level]' scope-isolation='false' />
+            </column>
+            <column-instance column='[inventory]' derivation='Avg' name='[avg:inventory:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[reorder level]' derivation='Avg' name='[avg:reorder level:qk]' pivot='key' type='quantitative' />
+            <column datatype='real' name='[inventory]' role='measure' type='quantitative'>
+            </column>
+            <column datatype='string' name='[manager]' role='dimension' type='nominal'>
+            </column>
+            <column-instance column='[Calculation_6270228173321084]' derivation='None' name='[none:Calculation_6270228173321084:nk]' pivot='key' type='nominal' />
+            <column-instance column='[manager]' derivation='None' name='[none:manager:nk]' pivot='key' type='nominal' />
+            <column-instance column='[product]' derivation='None' name='[none:product:nk]' pivot='key' type='nominal' />
+            <column datatype='string' name='[product]' role='dimension' type='nominal'>
+            </column>
+            <column datatype='real' name='[reorder level]' role='measure' type='quantitative'>
+            </column>
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[excel.41698.729093877315].[avg:reorder level:qk]' field-type='quantitative' fold='true' scope='cols' synchronized='true' type='space' />
+            <format attr='display' class='0' field='[excel.41698.729093877315].[avg:reorder level:qk]' scope='cols' value='false' />
+            <format attr='title' class='0' field='[excel.41698.729093877315].[avg:inventory:qk]' scope='cols' value='Inventory vs reorder level' />
+            <format attr='subtitle' class='0' field='[excel.41698.729093877315].[avg:inventory:qk]' scope='cols' value='' />
+            <format attr='auto-subtitle' class='0' field='[excel.41698.729093877315].[avg:inventory:qk]' scope='cols' value='true' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='1' x-axis-name='[excel.41698.729093877315].[avg:inventory:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[excel.41698.729093877315].[none:Calculation_6270228173321084:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' x-axis-name='[excel.41698.729093877315].[avg:reorder level:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+                <format attr='mark-color' value='#000000' />
+                <format attr='size' value='1.9890055656433105' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([excel.41698.729093877315].[none:manager:nk] / ([excel.41698.729093877315].[none:product:nk] / [excel.41698.729093877315].[none:Calculation_6270228173321084:nk]))</rows>
+        <cols>([excel.41698.729093877315].[avg:inventory:qk] + [excel.41698.729093877315].[avg:reorder level:qk])</cols>
+      </table>
+    </worksheet>
+    <worksheet name='recipients'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='reorder level+ (inventory.xlsx)' name='excel.41698.729093877315' />
+          </datasources>
+          <datasource-dependencies datasource='excel.41698.729093877315'>
+            <column caption='on alert' datatype='boolean' name='[Calculation_6270228173321084]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='[inventory]&lt;=[reorder level]' scope-isolation='false' />
+            </column>
+            <column datatype='string' name='[email address]' role='dimension' type='nominal'>
+            </column>
+            <column datatype='string' name='[manager]' role='dimension' type='nominal'>
+            </column>
+            <column-instance column='[Calculation_6270228173321084]' derivation='None' name='[none:Calculation_6270228173321084:nk]' pivot='key' type='nominal' />
+            <column-instance column='[email address]' derivation='None' name='[none:email address:nk]' pivot='key' type='nominal' />
+            <column-instance column='[manager]' derivation='None' name='[none:manager:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[excel.41698.729093877315].[none:Calculation_6270228173321084:nk]'>
+            <groupfilter function='member' level='[none:Calculation_6270228173321084:nk]' member='true' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[excel.41698.729093877315].[none:Calculation_6270228173321084:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='header'>
+            <format attr='width' field='[excel.41698.729093877315].[none:email address:nk]' value='152' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>([excel.41698.729093877315].[none:manager:nk] / [excel.41698.729093877315].[none:email address:nk])</rows>
+        <cols></cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows>
+    <window class='schema' source-height='-1' />
+    <window auto-hidden='0' class='worksheet' maximized='0' name='content'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='1' param='[excel.41698.729093877315].[none:Calculation_6270228173321084:nk]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[excel.41698.729093877315].[io:products on alert:nk]</field>
+          <field>[excel.41698.729093877315].[none:Calculation_6270228173321084:nk]</field>
+          <field>[excel.41698.729093877315].[none:manager:nk]</field>
+          <field>[excel.41698.729093877315].[usr:Calculation_6570228182149551:nk]</field>
+          <field>[excel.41698.730528865737].[none:manager:nk]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='1' name='recipients'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[excel.41698.729093877315].[none:Calculation_6270228173321084:nk]</field>
+          <field>[excel.41698.730528865737].[none:email address:nk]</field>
+          <field>[excel.41698.730528865737].[none:manager:nk]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='181' name='content' width='192'>
+      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
+      AWFmz/QUcsgVAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='84' name='recipients' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAABUCAIAAABbSa8FAAAAA3NCSVQICAjb4U/gAAAACXBI
+      WXMAAA7EAAAOxAGVKw4bAAAQVElEQVR4nO3de1yMaf8H8K9uxhbThJCm2ZSpma20E0YH5fDw
+      yC9ePLWaNbZ66leRlVBSqWzkEEOYNhX5NRRjJ7Qbsllt9SginQ86jA5Go1JSqZTuPH+MWIdJ
+      7R1rf6/r/U9m7vu67u91+7zumUvf18uIFy9eAIL8WQp/dQHI3xsKEEIIChBCCAoQQggKEEII
+      ChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQ
+      QggKEEIIChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQQggKEEII
+      ChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQQggKEEIIChBCCAoQ
+      QggKEELISHkHysrKPmUdyN/UCPQfziFEoI8whBAUIIQQFCCEEBQghBBiAcrmczjeCXV/5jje
+      mBXFvyx/6DvqErw5HH72kGscPtl8+QXUJXi/91jddb5X1OCKrkvwHvBmvoa3libx/V3sORwO
+      h2Pv4rX/p/xGfFDXeL9s/iAv/B5yt/HDgu0hEsk5lHs2NEXCXfZRL/8JUa15712pNC9DAqbD
+      eSVckuC/LVnZZv3eNXoTv8DwZ49KrxwP9/K33LPbmoYN55UGZUgB6qlJOnxAeKexe/SkWfY+
+      XotpAAAdhSd9fimu7sRoy3132ekX8zm8DE1d3fqKhoU71rT9wJNwD/Gsx5fEBfGSqjt7ZSP1
+      7/jyMgBAuJkj8Rat18yKPhiZXt0JSlNYnM2brKY+SvDeLOyYYTqpLLu0h6S3KjhwOQ0AACS/
+      7nfn32nEx7OcA7ctpOKNWdH7wlMk3aMnzbLZsM6aQR7Wm9NeKNgVerW6E5tk7rp9/VwAgPab
+      Ue78lMeY3qrgwOUKid6bS2nmNRnVi7fOvb1fwhGtV7t6cF/snUZcaQpr9RavcQm8DADg8U1F
+      6zVlpeJKWos3brM3ouTyOSIKV+tmfFqbMsvR32exAgDgtb8EOWaU4uMXeuxdyybjrXmxe45c
+      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
+      RU5ErkJggg==
+    </thumbnail>
+  </thumbnails>
+</workbook>

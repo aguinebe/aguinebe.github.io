@@ -1,0 +1,71 @@
+<div class="page-header">
+  <h1>{{ page.title }} <small>{{ page.tagline }}</small></h1>
+</div>
+
+<div class="row">
+  <div class="span10">
+    <div id="content_to_toc">
+    {{ page.excerpt }}
+    {{ content }}
+    </div>
+    <hr>
+    <div class="pagination">
+      <ul>
+      {% if page.previous %}
+        <li class="prev"><a href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a></li>
+      {% else %}
+        <li class="prev disabled"><a>&larr; Previous</a></li>
+      {% endif %}
+        <li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>
+      {% if page.next %}
+        <li class="next"><a href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a></li>
+      {% else %}
+        <li class="next disabled"><a>Next &rarr;</a>
+      {% endif %}
+      </ul>
+    </div>
+    <hr>
+    {% include JB/comments %}
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
+
+    <p/>
+    <h4>Table of content</h4>
+    <div id="toc">
+    </div>
+
+    <script>
+    $('#toc').toc({
+      'selectors': 'h2,h3', //elements to use as headings
+      'container': 'body', //element to find all selectors in
+      'smoothScrolling': false, //enable or disable smooth scrolling on click
+      'prefix': 'toc', //prefix for anchor tags and class names
+      'onHighlight': function(el) {}, //called when a new section is highlighted 
+      'highlightOnScroll': false, //add class to heading that is currently in focus
+      'highlightOffset': 0, //offset to trigger the next headline
+      'anchorName': function(i, heading, prefix) { //custom function for anchor name
+          return prefix+i;
+      },
+      'headerText': function(i, heading, $heading) { //custom function building the header-item text
+          return $heading.text();
+      },
+      'itemClass': function(i, heading, $heading, prefix) { // custom function for item class
+        return $heading[0].tagName.toLowerCase();
+      }
+    });
+    </script>
+
+  {% unless page.tags == empty %}
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    {% assign tags_list = page.tags %}
+    {% include JB/tags_list %}
+    </ul>
+
+
+  {% endunless %}  
+  </div>
+</div>

@@ -1,0 +1,12 @@
+---
+layout: default
+title: tableautips.net
+---
+
+	<p style="margin-left: 20px;">Articles on best practices, ideas, things to try with Tableau Software.</p>
+
+	<ul class="posts">
+	    {% for post in site.posts %}
+	      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+	    {% endfor %}
+  	</ul>

@@ -1,0 +1,32 @@
+#toc ol, #toc li {
+
+}
+
+.toc-depth-1m, .toc-depth-2 {
+	display: block;
+	margin-bottom: 1px;
+	padding: 5px;
+	color: white;
+	background-color: #AAA;
+
+	-moz-border-radius: .1em .4em .1em .4em;
+	border-radius: .1em .4em .1em .4em;
+}
+
+.todo {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border-left: 4px solid orange;
+	padding-left: 10px;
+}
+
+.todotitle {
+	color: orange;
+	font-size: 1.8em;
+	margin-bottom: 10px;
+}
+
+img{
+    max-width:100%; /* you can use % */
+    height: auto;
+}

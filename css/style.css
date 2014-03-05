@@ -79,6 +79,11 @@ p, pre, table {
   line-height: 1.5em;
 }
 
+p {
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
 table {
   margin: 20px 0px;
   background: #DDD;

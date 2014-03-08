@@ -163,7 +163,8 @@ Let's review the parameters:
 
 ### Things you may want to customize in the script ###
 
-{% highlight ruby linenos %}
+Search for this line. You'll want to replace `localhost` with your own mail server:
+{% highlight ruby %}
 Net::SMTP.start( 'localhost' ) do |smtp|
 {% endhighlight %}
 

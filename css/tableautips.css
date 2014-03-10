@@ -2,7 +2,7 @@
 
 }
 
-.toc-depth-1m, .toc-depth-2 {
+.toc-depth-1m, .toc-depth-2, .toc-depth-3 {
 	display: block;
 	margin-bottom: 1px;
 	padding: 5px;
@@ -11,6 +11,10 @@
 
 	-moz-border-radius: .1em .4em .1em .4em;
 	border-radius: .1em .4em .1em .4em;
+}
+
+.toc-depth-3 {
+	margin-left: 7px;
 }
 
 .todo {

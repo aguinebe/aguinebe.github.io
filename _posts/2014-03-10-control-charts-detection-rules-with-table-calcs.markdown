@@ -12,7 +12,13 @@ In this article we'll discuss implementing [control charts] detection rules with
 
 ### Control Charts Detection Rules With Table Calcs ###
 
+For a quick refresher on table calcs basics, head over to our article ["Basic Table Calcs"]({{site.url}}/calcs/2014/03/04/basic-table-calcs.html), or go to Tableau's very own [on-demand videos].
+
 #### n Consecutive Increases / Decreases ####
+
+This is a common rule for control charts: figure out when we have a streak of increases or decreases. When we go past 7, 8 or 9, we may have found an "assignable" cause, meaning we are out of the normal process conditions.
+
+We'll start first with a table calc to find, say, the 3rd consecutive increase. The following paragraph will show how to identify all three points that participated.
 
 ##### Find points starting at the n<sup>th</sup> #####
 
@@ -63,6 +69,8 @@ Its domain is \[`T`,`F`\]:
 
 #### n Consecutive Outside Bounds ####
 
+This another common rule for control charts. We want to know when n points are beyond a particular limit, e.g. 1 point above the centerline + 3 x standard deviation, or 8 consecutive points on the same side of the centerline.
+
 You can derive a lot of additional control chart rules simply by taking our table calc above and replacing
 ```
 sum(Sales) > lookup( sum(Sales), -1 )
@@ -72,6 +80,19 @@ with another expression, for example:
 sum(Sales) > [bound]
 ```
 to look for n consecutive points above a particular boundary.
+
+The resulting calc would be:
+
+```
+window_max(
+
+    iif( index()>[n] and window_sum(
+            iif( sum(Sales) > [bound], 1, 0 )
+            , -[n]+1, 0) = [n]
+        , 1, 0 )
+
+, 0, [n]-1 ) = 1
+```
 
 #### m out of n Consecutive Outside Bounds ####
 
@@ -111,3 +132,4 @@ We get the following domain for this calculated field:
 
 
 [Control Charts]: http://en.wikipedia.org/wiki/Control_charts
+[on-demand videos]: http://www.tableausoftware.com/learn/training

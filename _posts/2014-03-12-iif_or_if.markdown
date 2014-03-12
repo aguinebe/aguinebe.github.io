@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "Difference Between iif and if"
+date:   2014-03-12 14:48:00
+author: Alexis Guinebertiere
+categories: calcs
+excerpt: How does this work again?
+published: true
+---
+
+![iif and if]({{ site.url }}/assets/2014-03-12_iif_and_if.png)
+
+Just discovered this one yesterday. Not sure how I had not noticed for so long. Anyway...
+
+```
+iif( A, B, C ) 
+```
+
+is *not* equivalent to
+
+```
+if A then B else C end
+```
+
+The `iif` equivalent to `if A then B else C end` is
+
+```
+iif( A, B, C, C ) 
+```
+
+The third parameter is the value `iif` return is `A` is `false`. The fourth parameter is the value `iif` return if `A` cannot be evaluated (e.g. because of some null values).
+
+With an `if A then B else C end`, the else parameter is returned if `A` is `false` or if `A` cannot be evaluated.

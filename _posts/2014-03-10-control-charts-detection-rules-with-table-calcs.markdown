@@ -8,7 +8,7 @@ excerpt: How does this work again?
 published: true
 ---
 
-In this article we'll discuss implementing [control charts] detection rules with Tableau. We'll assume here that you have determined the boundaries (also called limits) for your control chart. Typically this would be a mean value plus or minus 1x, 2x or 3x your standard deviation. In this article we will just use `[boundary]` as the limit we need to control.
+In this article we'll discuss implementing [control charts] detection rules with Tableau. We'll assume here that you have determined the boundaries (also called limits) for your control chart. Typically this would be a mean value plus or minus 1x, 2x or 3x your standard deviation. In this article we will just use `[bound]` as the limit to use.
 
 ### Control Charts Detection Rules With Table Calcs ###
 

@@ -8,6 +8,8 @@ excerpt: How does this work again?
 published: true
 ---
 
+[Download the workbook here]({{ site.url }}/assets/IfAndIif.twbx)
+
 ![iif and if]({{ site.url }}/assets/2014-03-12_iif_and_if.png)
 
 Just discovered this one yesterday. Not sure how I had not noticed for so long. Anyway...

@@ -111,6 +111,15 @@ img {
   margin: 20px 0px;
 }
 
+p.hyperlink {
+  margin: 20px 0px 20px 20px;
+}
+
+.hyperlink img {
+  margin: 0px 0px 0px 0px;
+  vertical-align: middle;
+}
+
 .button {
   border-radius: 5px;
   background: #efefef;

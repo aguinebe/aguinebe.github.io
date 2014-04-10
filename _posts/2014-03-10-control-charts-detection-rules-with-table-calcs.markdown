@@ -10,6 +10,11 @@ published: true
 
 In this article we'll discuss implementing [control charts] detection rules with Tableau. We'll assume here that you have determined the boundaries (also called limits) for your control chart. Typically this would be a mean value plus or minus 1x, 2x or 3x your standard deviation. In this article we will just use `[bound]` as the limit to use.
 
+<p class='hyperlink' markdown='1'>
+![tableau workbook icon]({{ site.url }}/assets/tableau_workbook.png)
+[ControlCharts.twbx]({{ site.url }}/assets/ControlCharts.twbx)
+</p>
+
 ### Control Charts Detection Rules With Table Calcs ###
 
 For a quick refresher on table calcs basics, head over to our article ["Basic Table Calcs"]({{site.url}}/calcs/2014/03/04/basic-table-calcs.html), or go to Tableau's very own [on-demand videos].

@@ -10,6 +10,11 @@ published: true
 
 ### What is a run chart? ###
 
+<p class='hyperlink' markdown='1'>
+![tableau workbook icon]({{ site.url }}/assets/tableau_workbook.png)
+[RunCharts.twbx]({{ site.url }}/assets/RunCharts.twbx)
+</p>
+
 A run chart is a simpler form of a control chart. Here are the run chart characteristics:
 - Its centerline is the median of the points
 - Rule #1 is to check for the number of runs. A run is a series on consecutive points above or below the centerline. Check that the number of runs is within acceptable limits (see below for what this means).
